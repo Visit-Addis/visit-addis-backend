@@ -45,5 +45,19 @@ const verifyPassword = (schema) => {
     }
   };
 };
+const verifyEmail = (schema) => {
+  schema.methods.verifyEmail = async function (email) {
+    try {
+      if ((await this.email) === email) {
+        this.isVerified = true;
+        await this.save();
+      }
+      return this.isVerified;
+    } catch (error) {
+      logError(error);
+      throw new CustomError(403, `email checking failed`, true);
+    }
+  };
+};
 
-export { format, isEmailUsed, verifyPassword };
+export { format, isEmailUsed, verifyPassword, verifyEmail };

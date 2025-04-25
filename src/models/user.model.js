@@ -26,9 +26,24 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     favorite: {
-      attractions: [mongoose.Schema.Types.ObjectId],
-      events: [mongoose.Schema.Types.ObjectId],
-      restaurants: [mongoose.Schema.Types.ObjectId],
+      attractions: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Attraction",
+        },
+      ],
+      events: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Event",
+        },
+      ],
+      restaurants: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Restaurant",
+        },
+      ],
     },
     role: {
       type: String,

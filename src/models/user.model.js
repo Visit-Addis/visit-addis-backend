@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import { logError } from "../utils/index.js";
 import { roles } from "../configs/constants.js";
+import { format, isEmailUsed, verifyPassword } from "./plugin.js";
+
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -51,6 +53,11 @@ userSchema.pre("save", async function (next) {
     next(error);
   }
 });
+
+userSchema.plugin(format, "toJSON");
+userSchema.plugin(format, "toObject");
+userSchema.plugin(isEmailUsed);
+userSchema.plugin(verifyPassword);
 
 const User = mongoose.model("User", userSchema);
 export default User;

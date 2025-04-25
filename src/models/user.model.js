@@ -26,8 +26,9 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     favorite: {
-      type: [String],
-      default: [],
+      attractions: [mongoose.Schema.Types.ObjectId],
+      events: [mongoose.Schema.Types.ObjectId],
+      restaurants: [mongoose.Schema.Types.ObjectId],
     },
     role: {
       type: String,

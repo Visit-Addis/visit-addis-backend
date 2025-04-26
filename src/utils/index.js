@@ -4,6 +4,7 @@ import handleCatchError from "./catch.error.js";
 import mongooseErrorHandlers from "./mongoose.error.js";
 import authenticationErrorHandlers from "./auth.error.js";
 import genericErrorHandlers from "./genneric.error.js";
+import pick from "./pick.js";
 
 export {
   logError,
@@ -12,4 +13,5 @@ export {
   mongooseErrorHandlers,
   authenticationErrorHandlers,
   genericErrorHandlers,
+  pick,
 };

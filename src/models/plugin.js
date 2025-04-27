@@ -35,6 +35,17 @@ const isEmailUsed = (schema) => {
   };
 };
 
+const isUserNameUsed = (schema) => {
+  schema.statics.isUserNameUsed = async function (userName) {
+    try {
+      return !!(await this.findOne({ userName: userName }));
+    } catch (error) {
+      logError(error);
+      throw new CustomError(400, `Your user name is used `, true);
+    }
+  };
+};
+
 const verifyPassword = (schema) => {
   schema.methods.verifyPassword = async function (password) {
     try {
@@ -60,4 +71,4 @@ const verifyEmail = (schema) => {
   };
 };
 
-export { format, isEmailUsed, verifyPassword, verifyEmail };
+export { format, isEmailUsed, verifyPassword, verifyEmail, isUserNameUsed };

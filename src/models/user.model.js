@@ -2,11 +2,17 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import { logError } from "../utils/index.js";
 import { roles } from "../configs/constants.js";
-import { format, isEmailUsed, verifyPassword } from "./plugin.js";
+import {
+  format,
+  isEmailUsed,
+  verifyPassword,
+  verifyEmail,
+  isUserNameUsed,
+} from "./plugin.js";
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    userName: {
       type: String,
       required: [true, "user name is required"],
       trim: true,
@@ -74,6 +80,8 @@ userSchema.plugin(format, "toJSON");
 userSchema.plugin(format, "toObject");
 userSchema.plugin(isEmailUsed);
 userSchema.plugin(verifyPassword);
+userSchema.plugin(verifyEmail);
+userSchema.plugin(isUserNameUsed);
 
 const User = mongoose.model("User", userSchema);
 export default User;

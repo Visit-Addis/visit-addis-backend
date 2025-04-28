@@ -1,6 +1,13 @@
 import { User } from "../models/index.js";
 import { CustomError } from "../utils/index.js";
 import userService from "./user.service.js";
+import tokenService from "./token.service.js";
+import emailService from "./email.service.js";
+import {
+  createResetPassworForm,
+  createResetSuccessMessage,
+} from "../configs/html.js";
+import { envVar } from "../configs/env.vars.js";
 
 const registerUser = async (userData) => {
   const { userName, email } = userData;
@@ -21,7 +28,7 @@ const registerUser = async (userData) => {
   return user;
 };
 
-const loginUSer = async (userData) => {
+const loginUser = async (userData) => {
   const { email, password } = userData;
   const user = await User.findOne({ email });
   if (!user) {
@@ -35,13 +42,46 @@ const loginUSer = async (userData) => {
 
 const acceptPasswordResetRequest = async (email) => {
   const user = await userService.getUserByEmail(email);
+  const token = await tokenService.generateResetToken(user.id, user.role);
+  await emailService.sendResetPasswordLink(email, token);
+  return { message: "Reset password link sent to your email" };
 };
-const sentResetPasswordForm = async () => {};
-const resetPassword = async (newPassword) => {};
+
+const sentResetPasswordForm = async (token) => {
+  const resetLink = `${envVar.serverUrl}/api/v1/auth/reset-password`;
+  const decodedToken = tokenService.verifyToken(token);
+  const user = await User.findById(decodedToken.sub);
+  if (!user) {
+    throw new CustomError(400, "invalid token", true);
+  }
+  const newToken = await tokenService.generateResetToken(user.id, user.role);
+  const resetPasswordForm = createResetPassworForm(resetLink, newToken);
+  return resetPasswordForm;
+};
+
+const resetPassword = async (token, newPassword) => {
+  const decodedToken = tokenService.verifyToken(token);
+  const user = await User.findById(decodedToken.sub);
+  if (!user) {
+    throw new CustomError(400, "invalid token", true);
+  }
+  const isMatch = await user.verifyPassword(newPassword);
+  if (isMatch) {
+    throw new CustomError(
+      400,
+      "new password should be different from old password",
+      true
+    );
+  }
+  user.password = newPassword;
+  await user.save();
+  const message = createResetSuccessMessage(envVar.serverUrl);
+  return message;
+};
 
 export default {
   registerUser,
-  loginUSer,
+  loginUser,
   acceptPasswordResetRequest,
   sentResetPasswordForm,
   resetPassword,

@@ -7,4 +7,10 @@ const category = {
   restaurants: ["traditional", "modern", "cafe"],
 };
 
-export { roles, roleRights, category };
+const tokenTypes = {
+  ACCESS: "access",
+  RESET: "reset",
+  REFRESH: "refresh",
+  VERIFY: "verify",
+};
+export { roles, roleRights, category, tokenTypes };

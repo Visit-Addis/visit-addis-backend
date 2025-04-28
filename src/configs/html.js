@@ -1,3 +1,5 @@
+import { token } from "morgan";
+
 const createResetPassworForm = async (resetLink, token) => {
   const html_form = `
     <style>

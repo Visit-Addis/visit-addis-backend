@@ -71,7 +71,7 @@ const createResetPassworForm = async (resetLink, token) => {
   return html_form;
 };
 
-const CreateResetFormSuccessMessage = async (serverUrl) => {
+const createResetSuccessMessage = async (serverUrl) => {
   return `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -122,7 +122,7 @@ const CreateResetFormSuccessMessage = async (serverUrl) => {
       </html>`;
 };
 
-const CreateResetFormErrorMessage = async (serverUrl) => {
+const createResetErrorMessage = async (serverUrl) => {
   return `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -183,7 +183,7 @@ const createResetPasswordLink = async (resetLink) => {
 
 export {
   createResetPassworForm,
-  CreateResetFormSuccessMessage,
-  CreateResetFormErrorMessage,
+  createResetSuccessMessage,
+  createResetErrorMessage,
   createResetPasswordLink,
 };

@@ -27,11 +27,10 @@ const registerUser = async (userData) => {
   if (!user) {
     throw new CustomError(400, "user creation failed", true);
   }
-  return user;
+  return { message: "user registered successfully", userId: user.id };
 };
 
-const loginUser = async (userData) => {
-  const { email, password } = userData;
+const loginUser = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user) {
     throw new CustomError(400, "Incorrect Email or Password");

@@ -14,6 +14,7 @@ const envSchema = Joi.object()
     SERVER_URL: Joi.string().required(),
     GOOGLE_CLIENT_ID: Joi.string().required(),
     GOOGLE_CLIENT_SECRET: Joi.string().required(),
+    SESSION_SECRET: Joi.string().required(),
   })
   .unknown();
 export default envSchema;

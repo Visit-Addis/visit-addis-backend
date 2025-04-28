@@ -32,4 +32,7 @@ export const envVar = {
     clientId: env.GOOGLE_CLIENT_ID,
     clientSecret: env.GOOGLE_CLIENT_SECRET,
   },
+  session: {
+    secret: env.SESSION_SECRET,
+  },
 };

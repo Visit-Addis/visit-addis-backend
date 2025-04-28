@@ -1,4 +1,5 @@
-const roles = Object.keys({ user: [], admin: [] });
+const allRoles = { user: [], admin: [] };
+const roles = Object.keys(allRoles);
 const roleRights = new Map(Object.entries(allRoles));
 
 const category = {

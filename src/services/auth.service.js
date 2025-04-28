@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { User } from "../models/index.js";
 import { CustomError } from "../utils/index.js";
 import userService from "./user.service.js";
@@ -8,6 +9,7 @@ import {
   createResetSuccessMessage,
 } from "../configs/html.js";
 import { envVar } from "../configs/env.vars.js";
+import { tokenTypes } from "../configs/constants.js";
 
 const registerUser = async (userData) => {
   const { userName, email } = userData;
@@ -34,10 +36,19 @@ const loginUser = async (userData) => {
   if (!user) {
     throw new CustomError(400, "Incorrect Email or Password");
   }
-  if (!user.verifyPassword) {
-    throw new CustomError(400, "Incorrect Email or Password");
+  if (await user.isOAuthUser()) {
+    throw new CustomError(403, "please login with your google acount", true);
   }
-  return { message: "login successfully", token: "" };
+  if (!user.verifyPassword(password)) {
+    throw new CustomError(400, "Incorrect Email or Password", true);
+  }
+  const accessToken = tokenService.generateToken(
+    user.id,
+    user.role,
+    tokenTypes.ACCESS,
+    DateTime.now().plus({ minutes: envVar.token.acessTokenExp })
+  );
+  return { message: "login successfully", token: accessToken };
 };
 
 const acceptPasswordResetRequest = async (email) => {

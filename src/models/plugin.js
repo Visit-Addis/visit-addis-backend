@@ -70,5 +70,22 @@ const verifyEmail = (schema) => {
     }
   };
 };
+const isOAuthUser = (schema) => {
+  schema.methods.isOAuthUser = async function () {
+    try {
+      return await this.isOAuthUser;
+    } catch (error) {
+      logError(error);
+      throw new CustomError(403, `isOAuthUser checking failed`, true);
+    }
+  };
+};
 
-export { format, isEmailUsed, verifyPassword, verifyEmail, isUserNameUsed };
+export {
+  format,
+  isEmailUsed,
+  verifyPassword,
+  verifyEmail,
+  isUserNameUsed,
+  isOAuthUser,
+};

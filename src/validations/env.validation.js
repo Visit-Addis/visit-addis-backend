@@ -12,6 +12,8 @@ const envSchema = Joi.object()
     EMAIL_VERIFICATION_TOKEN_EXPIRES_IN_SECONDS: Joi.number().required(),
     JWT_SECRET_KEY: Joi.string().required(),
     SERVER_URL: Joi.string().required(),
+    GOOGLE_CLIENT_ID: Joi.string().required(),
+    GOOGLE_CLIENT_SECRET: Joi.string().required(),
   })
   .unknown();
 export default envSchema;

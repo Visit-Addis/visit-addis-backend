@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { envSchema } from "../validations/index.js";
+import { cli } from "winston/lib/winston/config/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = resolve(__filename, "..", "..", "src", "configs");
@@ -26,5 +27,9 @@ export const envVar = {
     resetPasswordToknExp: env.RESET_PASSWORD_TOKEN_EXPIRES_IN_SECONDS,
     emailVerificationTokenEXp: env.EMAIL_VERIFICATION_TOKEN_EXPIRES_IN_SECONDS,
     jwtSecret: env.JWT_SECRET_KEY,
+  },
+  google: {
+    clientId: env.GOOGLE_CLIENT_ID,
+    clientSecret: env.GOOGLE_CLIENT_SECRET,
   },
 };

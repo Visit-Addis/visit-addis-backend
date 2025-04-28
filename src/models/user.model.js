@@ -60,6 +60,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isOAuthUser: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

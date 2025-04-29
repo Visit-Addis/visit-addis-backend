@@ -27,7 +27,7 @@ const googleVerifyCallback = async (
     if (user) {
       return done(null, user);
     } else {
-      const newUser = await User.createUser({
+      const newUser = await User.create({
         email,
         userName,
         password: null,

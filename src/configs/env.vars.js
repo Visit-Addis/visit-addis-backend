@@ -35,4 +35,13 @@ export const envVar = {
   session: {
     secret: env.SESSION_SECRET,
   },
+  mail: {
+    host: env.EMAIL_HOST,
+    port: env.EMAIL_PORT,
+    secure: env.EMAIL_SECURE,
+    userName: env.USER_EMAIL,
+    password: env.USER_PASSWORD,
+    from: env.EMAIL_FROM,
+    appName: env.APP_NAME,
+  },
 };

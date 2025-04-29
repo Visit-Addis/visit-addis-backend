@@ -1,6 +1,4 @@
-import { token } from "morgan";
-
-const createResetPassworForm = async (resetLink, token) => {
+const createResetPassworForm = (resetLink, token) => {
   const html_form = `
     <style>
       body {
@@ -73,7 +71,7 @@ const createResetPassworForm = async (resetLink, token) => {
   return html_form;
 };
 
-const createResetSuccessMessage = async (serverUrl) => {
+const createResetSuccessMessage = (serverUrl) => {
   return `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -124,7 +122,7 @@ const createResetSuccessMessage = async (serverUrl) => {
       </html>`;
 };
 
-const createResetErrorMessage = async (serverUrl) => {
+const createResetErrorMessage = (serverUrl) => {
   return `<!DOCTYPE html>
       <html lang="en">
       <head>
@@ -175,7 +173,7 @@ const createResetErrorMessage = async (serverUrl) => {
       </html>`;
 };
 
-const createResetPasswordLink = async (resetLink) => {
+const createResetPasswordLink = (resetLink) => {
   return `
       <p>You have requested to reset your password. Please click on the following link to reset it:</p>
       <p><a href="${resetLink}">Reset Password</a></p>

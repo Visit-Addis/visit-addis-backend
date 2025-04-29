@@ -23,7 +23,7 @@ const registerUser = async (userData) => {
   if (isEmailUsed) {
     throw new CustomError(400, "email already exists", true);
   }
-  const user = await User.createUser(userData);
+  const user = await User.create(userData);
   if (!user) {
     throw new CustomError(400, "user creation failed", true);
   }
@@ -35,7 +35,7 @@ const loginUser = async (email, password) => {
   if (!user) {
     throw new CustomError(400, "Incorrect Email or Password");
   }
-  if (await user.isOAuthUser()) {
+  if (await user.isGAuthUser()) {
     throw new CustomError(403, "please login with your google acount", true);
   }
   if (!user.verifyPassword(password)) {
@@ -58,7 +58,7 @@ const acceptPasswordResetRequest = async (email) => {
 };
 
 const sentResetPasswordForm = async (token) => {
-  const resetLink = `${envVar.serverUrl}/api/v1/auth/reset-password`;
+  const resetLink = `${envVar.serverUrl}/api/v1/auth/password-reset`;
   const decodedToken = tokenService.verifyToken(token);
   const user = await User.findById(decodedToken.sub);
   if (!user) {

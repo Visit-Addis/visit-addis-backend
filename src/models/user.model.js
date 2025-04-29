@@ -8,6 +8,7 @@ import {
   verifyPassword,
   verifyEmail,
   isUserNameUsed,
+  isGAuthUser,
 } from "./plugin.js";
 
 const userSchema = new mongoose.Schema(
@@ -68,7 +69,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+  if (!this.isModified("password") || !this.password) return next();
   try {
     const hashedPassword = await bcrypt.hash(this.password, 10);
     this.password = hashedPassword;
@@ -85,6 +86,7 @@ userSchema.plugin(isEmailUsed);
 userSchema.plugin(verifyPassword);
 userSchema.plugin(verifyEmail);
 userSchema.plugin(isUserNameUsed);
+userSchema.plugin(isGAuthUser);
 
 const User = mongoose.model("User", userSchema);
 export default User;

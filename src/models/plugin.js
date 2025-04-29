@@ -70,8 +70,8 @@ const verifyEmail = (schema) => {
     }
   };
 };
-const isOAuthUser = (schema) => {
-  schema.methods.isOAuthUser = async function () {
+const isGAuthUser = (schema) => {
+  schema.methods.isGAuthUser = async function () {
     try {
       return await this.isOAuthUser;
     } catch (error) {
@@ -87,5 +87,5 @@ export {
   verifyPassword,
   verifyEmail,
   isUserNameUsed,
-  isOAuthUser,
+  isGAuthUser,
 };

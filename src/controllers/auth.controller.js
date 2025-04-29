@@ -1,14 +1,13 @@
 import { DateTime } from "luxon";
 import { handleCatchError } from "../utils/index.js";
-import { authService } from "../services/index.js";
+import { authService, tokenService } from "../services/index.js";
 import { CustomError } from "../utils/index.js";
 import { envVar } from "../configs/env.vars.js";
 import { tokenTypes } from "../configs/constants.js";
 import passport from "../configs/passport.js";
 
 const register = handleCatchError(async (req, res) => {
-  const { email, password } = req.body;
-  const { message, userId } = await authService.register(email, password);
+  const { message, userId } = await authService.registerUser(req.body);
   res.status(201).json({ message: message, userid: userId });
 });
 
@@ -26,7 +25,7 @@ const acceptPasswordResetRequest = handleCatchError(async (req, res) => {
 
 const sentResetPasswordForm = handleCatchError(async (req, res) => {
   const token = req.query.token;
-  const htmlResetForm = authService.sentResetPasswordForm(token);
+  const htmlResetForm = await authService.sentResetPasswordForm(token);
   res.status(200).send(htmlResetForm);
 });
 

@@ -34,7 +34,7 @@ const sendEmail = async (recipient, subject, html) => {
 
 const sendResetPasswordLink = async (email, token) => {
   try {
-    const resetLink = `${envVar.serverUrl}/api/v1/auth/reset-password-form?token=${token}`;
+    const resetLink = `${envVar.serverUrl}/api/v1/auth/password-reset-form?token=${token}`;
     const subject = "Reset Password";
     const html = createResetPasswordLink(resetLink);
     await sendEmail(email, subject, html);

@@ -41,7 +41,7 @@ const attractionSchema = new mongoose.Schema(
       default: 0,
     },
     ticketPrice: {
-      type: String,
+      type: Number,
       required: [true, "Attraction ticket price is required"],
     },
     hoursOfOperation: {

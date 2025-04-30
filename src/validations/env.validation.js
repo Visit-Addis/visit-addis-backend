@@ -23,6 +23,11 @@ const envSchema = Joi.object()
     USER_PASSWORD: Joi.string().required(),
     EMAIL_FROM: Joi.string().required(),
     APP_NAME: Joi.string().required(),
+
+    CLOUD_NAME: Joi.string().required(),
+    CLOUDNARY_API_KEY: Joi.string().required(),
+    CLOUDNARY_API_SECRET: Joi.string().required(),
+    CLOUDINARY_URL: Joi.string().required(),
   })
   .unknown();
 export default envSchema;

@@ -14,6 +14,7 @@
   "description": "This is the backend API built with Node.js, Express, and MongoDB. It manages and serves data for the Visit-Addis application, providing endpoints to access information about locations, attractions for exploring Addis Ababa",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.0",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -26,6 +27,7 @@
     "luxon": "^3.6.0",
     "mongoose": "^8.13.2",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.2",
     "nodemailer": "^6.10.0",
     "passport": "^0.7.0",
     "passport-google-oauth2": "^0.2.0",

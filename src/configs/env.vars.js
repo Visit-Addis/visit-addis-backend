@@ -44,4 +44,10 @@ export const envVar = {
     from: env.EMAIL_FROM,
     appName: env.APP_NAME,
   },
+  cloudinary: {
+    name: env.CLOUD_NAME,
+    apiKey: env.CLOUDNARY_API_KEY,
+    apiSecret: env.CLOUDNARY_API_SECRET,
+    url: env.CLOUDINARY_URL,
+  },
 };

@@ -1,2 +1,3 @@
 import authController from "./auth.controller.js";
-export { authController };
+import attractionController from "./attraction.controller.js";
+export { authController, attractionController };

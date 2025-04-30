@@ -32,4 +32,10 @@ export const envVar = {
     clientId: env.GOOGLE_CLIENT_ID,
     clientSecret: env.GOOGLE_CLIENT_SECRET,
   },
+  mail: {
+    host: env.MAIL_HOST,
+    port: env.MAIL_PORT,
+    user: env.MAIL_USER,
+    password: env.MAIL_PASSWORD,
+  },
 };

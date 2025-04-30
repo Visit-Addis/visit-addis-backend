@@ -22,12 +22,28 @@ const restaurantSchema = new mongoose.Schema(
       required: [true, "priceRange is required"],
     },
     menu: {
-      type: String,
+      type: [String], // have  Changed to an array of strings 
       required: [true, "menu is required"],
-      //not implemented yet
+    },
+    images: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Image",
+      },
+    ],
+    reviews: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+    averageRating: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }
 );
+
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 export default Restaurant;

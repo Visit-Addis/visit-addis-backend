@@ -1,2 +1,4 @@
 import authController from "./auth.controller.js";
-export { authController };
+import restaurantController from "./restaurant.controller.js"; 
+
+export { authController, restaurantController };

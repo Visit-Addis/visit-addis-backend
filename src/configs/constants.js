@@ -1,4 +1,8 @@
 const roles = Object.keys({ user: [], admin: [] });
+const allRoles = {
+  user: ["read"], 
+  admin: ["read", "write", "delete", "manageUsers"], //Admins have full access
+};
 const roleRights = new Map(Object.entries(allRoles));
 
 const category = {

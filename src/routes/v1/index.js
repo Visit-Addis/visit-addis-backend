@@ -2,7 +2,7 @@ import express from "express";
 import auhRoute from "./auth.route.js";
 import profileRoute from "./profile.route.js";
 import reviewRoute from "./review.route.js";
-import hotelRoute from "./hotel.route.js";
+import restuarantRoute from "./restuarant.route.js";
 import eventRoute from "./event.route.js";
 import atrractionRoute from "./attraction.route.js";
 
@@ -25,8 +25,8 @@ const routes = [
     route: atrractionRoute,
   },
   {
-    path: "/hotel",
-    route: hotelRoute,
+    path: "/restuarant",
+    route: restuarantRoute,
   },
   {
     path: "/review",

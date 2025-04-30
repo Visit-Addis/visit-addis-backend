@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import { format } from "./plugin.js";
 const restaurantSchema = new mongoose.Schema(
   {
     name: {
@@ -29,5 +29,7 @@ const restaurantSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+restaurantSchema.plugin(format, "toObject");
+restaurantSchema.plugin(format, "toJSON");
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 export default Restaurant;

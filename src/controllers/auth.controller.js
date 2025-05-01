@@ -20,7 +20,7 @@ const login = handleCatchError(async (req, res) => {
 const acceptPasswordResetRequest = handleCatchError(async (req, res) => {
   const { email } = req.body;
   const { message } = await authService.acceptPasswordResetRequest(email);
-  res.status(200).json({ message: message });
+  res.status(200).json(message);
 });
 
 const sentResetPasswordForm = handleCatchError(async (req, res) => {

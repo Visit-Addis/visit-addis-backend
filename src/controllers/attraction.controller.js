@@ -3,7 +3,7 @@ import { handleCatchError } from "../utils/index.js";
 
 const postAttraction = handleCatchError(async (req, res) => {
   const attraction = await attractionService.postAttraction(req.body);
-  res.status(202).json(attraction);
+  res.status(201).json(attraction);
 });
 
 const updateAttraction = handleCatchError(async (req, res) => {

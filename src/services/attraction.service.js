@@ -52,19 +52,36 @@ const getAttractionDetails = async (id) => {
 
 const searchAttraction = async (searchItemes) => {
   let query = {};
+  const textSearchConditions = [];
   if (searchItemes.averageRating) {
     query.averageRating = { $gte: parseFloat(searchItemes.averageRating) };
-    delete searchItemes.searchItemes;
+    delete searchItemes.averageRating;
   }
 
-  if (searchItemes.ticketPrice) {
-    query.ticketPrice = { $lte: searchItemes.ticketPrice };
-    delete searchItemes.ticketPrice;
+  if (searchItemes.minTicketPrice) {
+    query.ticketPrice = {
+      ...query.ticketPrice,
+      $gte: parseFloat(searchItemes.minTicketPrice),
+    };
+    delete searchItemes.minTicketPrice;
   }
 
-  query.Object.keys(searchItemes).forEach((key) => {
-    query[key] = { $regex: key, $options: "i" };
-  });
+  if (searchItemes.maxTicketPrice) {
+    query.ticketPrice = {
+      ...query.ticketPrice,
+      $lte: parseFloat(searchItemes.maxTicketPrice),
+    };
+    delete searchItemes.maxTicketPrice;
+  }
+  for (const key in searchItemes) {
+    textSearchConditions.push({
+      [key]: { $regex: searchItemes[key], $options: "i" },
+    });
+  }
+
+  if (textSearchConditions.length > 0) {
+    query.$or = textSearchConditions;
+  }
 
   const attractions = await Attraction.find(query, "id name description");
   return attractions;

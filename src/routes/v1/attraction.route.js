@@ -1,6 +1,7 @@
 import express from "express";
 import { attractionController } from "../../controllers/index.js";
 const Router = express.Router();
+
 Router.route("/")
   .get(attractionController.getAttractions)
   .post(attractionController.postAttraction);

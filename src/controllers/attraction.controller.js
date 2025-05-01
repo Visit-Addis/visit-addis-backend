@@ -1,6 +1,23 @@
 import { attractionService } from "../services/index.js";
 import { handleCatchError } from "../utils/index.js";
 
+const postAttraction = handleCatchError(async (req, res) => {
+  const attraction = await attractionService.postAttraction(req.body);
+  res.status(202).json(attraction);
+});
+
+const updateAttraction = handleCatchError(async (req, res) => {
+  const id = req.params.id;
+  const message = await attractionService.updateAttraction(id, req.body);
+  res.status(200).json(message);
+});
+
+const deleteAttraction = handleCatchError(async (req, res) => {
+  const id = req.params.id;
+  const message = await attractionService.deleteAttraction(id);
+  res.status(200).json(message);
+});
+
 const getAttractions = handleCatchError(async (req, res) => {
   const attractions = await attractionService.getAttractions();
   res.status(200).json(attractions);
@@ -18,4 +35,11 @@ const searchAttractions = async (req, res) => {
   res.status(200).json(attractions);
 };
 
-export default { getAttractions, getAttractionDetail, searchAttractions };
+export default {
+  getAttractions,
+  getAttractionDetail,
+  searchAttractions,
+  postAttraction,
+  updateAttraction,
+  deleteAttraction,
+};

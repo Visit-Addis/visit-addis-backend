@@ -13,7 +13,7 @@ const reviewSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ["attraction", "event", "hotel"],
+      enum: ["attraction", "event", "restaurant"],
       required: [true, "category is required"],
     },
     comment: {

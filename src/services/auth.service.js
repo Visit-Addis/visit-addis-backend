@@ -33,7 +33,7 @@ const registerUser = async (userData) => {
 const loginUser = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user) {
-    throw new CustomError(400, "Incorrect Email or Password");
+    throw new CustomError(400, "Incorrect Email or Password", true);
   }
   if (await user.isGAuthUser()) {
     throw new CustomError(403, "please login with your google acount", true);

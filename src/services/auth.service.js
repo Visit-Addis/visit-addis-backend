@@ -13,14 +13,15 @@ import { tokenTypes } from "../configs/constants.js";
 
 const registerUser = async (userData) => {
   const { userName, email } = userData;
-  const { isUserNameUsed, isEmailUsed } = await Promise.all([
-    User.isUserNameUsed(userName),
-    User.isEmailUsed(email),
+  const [isUserNameUsed, isEmailUsed] = await Promise.all([
+    await User.isUserNameUsed(userName),
+    await User.isEmailUsed(email),
   ]);
   if (isUserNameUsed) {
     throw new CustomError(400, "user name already exists", true);
   }
   if (isEmailUsed) {
+    console.log("Email is used is executing..........", isEmailUsed);
     throw new CustomError(400, "email already exists", true);
   }
   const user = await User.create(userData);

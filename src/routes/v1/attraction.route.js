@@ -11,6 +11,6 @@ Router.route("/:id")
   .put(attractionController.updateAttraction)
   .delete(attractionController.deleteAttraction);
 
-Router.route("/search").get(attractionController.searchAttractions);
+Router.route("/att/search").get(attractionController.searchAttractions);
 
 export default Router;

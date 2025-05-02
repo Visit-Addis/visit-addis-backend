@@ -6,26 +6,48 @@ const postReview = async (userReview) => {
   const { userId, itemId, category } = userReview;
   const review = await Review.create(userReview);
   const reviewId = review.id;
-  let isReviewAdded = false;
+  let successMessagee = null;
   switch (category) {
     case "event":
       await addReview(Event, itemId, userId, reviewId);
+      successMessagee = "Review added successfully";
+      break;
     case "attraction":
       await addReview(Attraction, itemId, userId, reviewId);
+      successMessagee = "Review added successfully";
+      break;
     case "restaurant":
       await addReview(Restaurant, itemId, userId, reviewId);
+      successMessagee = "Review added successfully";
+      break;
     default:
       throw new CustomError(400, `No category found${category}`, true);
+      break;
   }
-  if (isReviewAdded) {
-    return "Review added successfully";
-  }
+
+  return successMessagee;
 };
 
-const deleteReview = async () => {};
+const deleteReview = async (id) => {
+  const deletedReview = await Review.findByIdAndDelete(id);
+  if (!deleteReview) {
+    throw new CustomError(400, "no Review found with this id");
+  }
+  return " review deleted successfully";
+};
 
-const updateReview = async () => {};
+const updateReview = async (id, data) => {
+  const review = await Review.findById(id);
+  Object.keys(data).forEach((key) => {
+    review[key] = data[key];
+  });
+  await review.save();
+  return "review updated successfully";
+};
 
-const getReviews = async () => {};
+const getReviews = async () => {
+  const reveiws = await Review.find({});
+  return reveiws;
+};
 
 export default { postReview, deleteReview, getReviews, updateReview };

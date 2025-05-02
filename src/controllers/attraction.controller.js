@@ -1,14 +1,17 @@
 import { attractionService, reviewService } from "../services/index.js";
 import { handleCatchError } from "../utils/index.js";
+import { updloadAndSaveImge } from "./util.js";
 
 const postAttraction = handleCatchError(async (req, res) => {
-  const attraction = await attractionService.postAttraction(req.body);
+  const attractionData = await updloadAndSaveImge(req, "attractions");
+  const attraction = await attractionService.postAttraction(attractionData);
   res.status(201).json(attraction);
 });
 
 const updateAttraction = handleCatchError(async (req, res) => {
   const id = req.params.id;
-  const message = await attractionService.updateAttraction(id, req.body);
+  const attractionData = await updloadAndSaveImge(req, "attraction");
+  const message = await attractionService.updateAttraction(id, attractionData);
   res.status(200).json(message);
 });
 

@@ -1,5 +1,6 @@
 import { restaurantService, reviewService } from "../services/index.js";
 import { handleCatchError } from "../utils/index.js";
+import { updloadAndSaveImge } from "./util.js";
 
 const getRestaurants = handleCatchError(async (req, res) => {
   const restaurants = await restaurantService.getAllRestaurants();
@@ -19,7 +20,8 @@ const searchRestaurants = handleCatchError(async (req, res) => {
 });
 
 const postRestaurant = handleCatchError(async (req, res) => {
-  const message = await restaurantService.postRestaurant(req.body);
+  const restaurantData = await updloadAndSaveImge(req, "restaurants");
+  const message = await restaurantService.postRestaurant(restaurantData);
   res.status(201).json(message);
 });
 
@@ -31,7 +33,8 @@ const deleteRestaurant = handleCatchError(async (req, res) => {
 
 const updateRestaurant = handleCatchError(async (req, res) => {
   const id = req.params.id;
-  const message = await restaurantService.updateRestaurant(id, req.body);
+  const restaurantData = await updloadAndSaveImge(req, "restaurants");
+  const message = await restaurantService.updateRestaurant(id, restaurantData);
   res.status(202).json(message);
 });
 

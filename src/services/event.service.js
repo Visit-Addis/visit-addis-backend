@@ -26,7 +26,10 @@ const deleteEvent = async (id) => {
 };
 
 const getEvents = async () => {
-  const events = await Event.find({}, "id name description date time images");
+  const events = await Event.find(
+    {},
+    "id name description date time images"
+  ).populate({ path: "images", select: "url" });
   return events;
 };
 

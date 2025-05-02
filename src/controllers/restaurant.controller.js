@@ -3,7 +3,7 @@ import { handleCatchError } from "../utils/index.js";
 import { updloadAndSaveImge } from "./util.js";
 
 const getRestaurants = handleCatchError(async (req, res) => {
-  const restaurants = await restaurantService.getAllRestaurants();
+  const restaurants = await restaurantService.getRestaurants();
   res.status(200).json(restaurants);
 });
 

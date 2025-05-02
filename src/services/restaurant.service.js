@@ -1,8 +1,11 @@
 import { Restaurant } from "../models/index.js";
 import { CustomError } from "../utils/index.js";
 
-const getAllRestaurants = async () => {
-  const restaurants = await Restaurant.find({}, "id name location");
+const getRestaurants = async () => {
+  const restaurants = await Restaurant.find(
+    {},
+    "id name images location"
+  ).populate({ path: "images", select: "url" });
   if (!restaurants) {
     throw new CustomError(400, "No Restaurant found", true);
   }
@@ -71,7 +74,7 @@ const updateRestaurant = async (id, data) => {
 };
 
 export default {
-  getAllRestaurants,
+  getRestaurants,
   getRestaurantDetails,
   searchRestaurants,
   deleteRestaurant,

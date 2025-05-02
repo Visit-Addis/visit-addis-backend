@@ -35,7 +35,7 @@ const getAttractions = async () => {
   const attractions = await Attraction.find(
     {},
     "id name description images ticketPrice location category"
-  );
+  ).populate({ path: "images", select: "url" });
   if (!attractions) {
     throw new CustomError(400, "No attraction found", true);
   }

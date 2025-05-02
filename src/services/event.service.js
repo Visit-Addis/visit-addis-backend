@@ -42,10 +42,30 @@ const getEventDetail = async (id) => {
   return eventDetail;
 };
 
+const searchEvents = async (filters) => {
+  const query = {};
+  const textSearchConditions = [];
+  if (filters.averageRating) {
+    query.averageRating = { $gte: parseFloat(filters.averageRating) };
+    delete filters.averageRating;
+  }
+  for (const key in filters) {
+    textSearchConditions.push({
+      [key]: { $regex: filters[key], $options: "i" },
+    });
+  }
+  if (textSearchConditions.length > 0) {
+    query.$or = textSearchConditions;
+  }
+  const events = await Event.find(query, "id name location");
+  return events;
+};
+
 export default {
   postEvent,
   updateEvent,
   deleteEvent,
   getEventDetail,
   getEvents,
+  searchEvents,
 };

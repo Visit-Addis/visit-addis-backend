@@ -10,7 +10,10 @@ const getAllRestaurants = async () => {
 };
 
 const getRestaurantDetails = async (id) => {
-  const restaurant = await Restaurant.findById(id);
+  const restaurant = await Restaurant.findById(id)
+    .select("id name location images averageRating contact reviews")
+    .populate({ path: "images", select: "url" })
+    .populate({ path: "reviews", select: "userId rating comment" });
   if (!restaurant) {
     throw new CustomError(404, "This restaurant is not found", true);
   }

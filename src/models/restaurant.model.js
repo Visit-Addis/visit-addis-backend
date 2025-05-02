@@ -17,6 +17,12 @@ const restaurantSchema = new mongoose.Schema(
       required: [true, "contact is required"],
       trim: true,
     },
+    images: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Image",
+      },
+    ],
     priceRange: {
       type: String,
       required: [true, "priceRange is required"],

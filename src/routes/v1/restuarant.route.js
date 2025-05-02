@@ -1,10 +1,15 @@
 import express from "express";
 import { restaurantController } from "../../controllers/index.js";
 
-const router = express.Router();
+const Router = express.Router();
+Router.route("/")
+  .get(restaurantController.getRestaurants)
+  .post(restaurantController.postRestaurant);
+Router.route("/:d")
+  .get(restaurantController.getRestaurantDetails)
+  .put(restaurantController.updateRestaurant)
+  .delete(restaurantController.deleteRestaurant);
+Router.route("/res/search").get(restaurantController.searchRestaurants);
+Router.route("/rev/review").post(restaurantController.postReview);
 
-router.get("/", restaurantController.getRestaurants);
-router.get("/:id", restaurantController.getRestaurantById);
-router.get("/filter", restaurantController.filterRestaurants);
-
-export default router;
+export default Router;

@@ -23,7 +23,6 @@ const restaurantSchema = new mongoose.Schema(
     },
     menu: {
       type: [String], // have  Changed to an array of strings
-      required: [true, "menu is required"],
       //not implemented yet
     },
     averageRating: {

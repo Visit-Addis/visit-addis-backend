@@ -36,7 +36,8 @@ const searchAttractions = async (req, res) => {
 };
 
 const postReview = handleCatchError(async (req, res) => {
-  (req.body.category = "attraction"), (req.body.userId = req.user.id);
+  req.body.category = "attraction";
+  req.body.userId = req.user.id;
   const review = await reviewService.postReview(req.body);
   res.status(201).json(review);
 });

@@ -1,4 +1,11 @@
-import express from "express";
+import express from 'express';
+import { getProfile, updateProfile } from '../../controllers/profile.controller.js';
+import { isAuthenticated } from '../../middlewares/auth.js'; // ✅ Import correctly
 
-const Router = express.Router();
-export default Router;
+const router = express.Router();
+
+router.route('/')
+  .get(isAuthenticated, getProfile)
+  .put(isAuthenticated, updateProfile);
+
+export default router;

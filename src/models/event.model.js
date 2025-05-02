@@ -3,6 +3,12 @@ import { category } from "../configs/constants.js";
 
 const eventSchema = new mongoose.Schema(
   {
+    _id: {
+      type: String,
+      required: true,
+      unique: true,
+      default: () => `event-${Math.random().toString(36).substring(2, 9)}`
+    },
     name: {
       type: String,
       required: true,
@@ -41,10 +47,25 @@ const eventSchema = new mongoose.Schema(
         ref: "Image",
       },
     ],
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+    reviews: [{ 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: "Review" 
+    }],
   },
-  { timestamps: true }
+  { 
+    timestamps: true,
+    _id: true // This ensures our custom _id is used
+  }
 );
 
-const Event = mongoose.model("Event", eventSchema);
+// Add text index for search functionality
+eventSchema.index({
+  name: 'text',
+  description: 'text',
+  location: 'text'
+});
+
+// ✅ Prevent OverwriteModelError during hot reload
+const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
+
 export default Event;

@@ -37,4 +37,6 @@ routes.forEach((route) => {
   Router.use(route.path, route.route);
 });
 
+routes.use('/profile', profileRoutes);
+
 export default Router;

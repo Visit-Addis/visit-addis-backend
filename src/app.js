@@ -11,7 +11,22 @@ import apiRoute from "./routes/v1/index.js";
 import { envVar } from "./configs/env.vars.js";
 
 const app = express();
+const express = require('express');
+const eventRoutes = require('./routes/event.route');
 
+// Other middleware and configurations...
+
+// Register event routes
+app.use('/api/v1/events', eventRoutes);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' });
+});
+
+
+module.exports = app;
 app.use(cors());
 
 app.use(express.json());

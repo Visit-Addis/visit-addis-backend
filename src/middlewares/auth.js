@@ -1,10 +1,12 @@
 import { tokenService, userService } from "../services/index.js";
 import { roles, roleRights } from "../configs/constants.js";
-import { CustomError } from "../utils";
+import CustomError from "../utils/custom.error.js";
 
 const isAuthenticated = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) throw new CustomError(401, "No token provided");
+
     const decoded = tokenService.verifyToken(token);
     req.user = await userService.getUserById(decoded.sub);
     next();
@@ -37,4 +39,5 @@ const isAuthorized =
     }
   };
 
-export default { isAuthenticated, isAuthorized };
+// ✅ Export as named exports
+export { isAuthenticated, isAuthorized };

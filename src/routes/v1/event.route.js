@@ -1,4 +1,13 @@
-import express from "express";
+import { Router } from 'express';
+import { 
+  getEvents,
+  getEventDetails 
+} from '../../controllers/event.controller.js'; // Named imports matching exports
 
-const Router = express.Router();
-export default Router;
+const router = Router();
+
+// API Endpoints
+router.get('/', getEvents);          // GET /api/v1/events
+router.get('/:id', getEventDetails); // GET /api/v1/events/:id
+
+export default router;

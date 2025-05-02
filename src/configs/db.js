@@ -1,17 +1,39 @@
-import mongoose from "mongoose";
-import { envVar } from "./env.vars.js";
-import { logError } from "../utils/index.js";
-import logger from "./wins.logger.js";
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-// This function connects to the MongoDB database using Mongoose.
+dotenv.config();
+
 const connectDB = async () => {
+  const uri = process.env.MONGODB_URI;
+
+  // Nuclear-proof connection settings
+  const options = {
+    serverSelectionTimeoutMS: 50000,
+    socketTimeoutMS: 50000,
+    connectTimeoutMS: 50000,
+    family: 4, // Force IPv4
+    maxPoolSize: 1, // Reduce connection attempts
+    retryWrites: true,
+    w: 'majority'
+  };
+
+  console.log('🚀 Attempting MongoDB connection...');
+
   try {
-    const db = await mongoose.connect(envVar.dataBaseUrl);
-    logger.infoLogger.info(
-      `MONGODB DataBase connected successfully at => ${db.connection.host}`
-    );
+    await mongoose.connect(uri, options);
+    console.log('🎉 SUCCESS! MongoDB Connected');
+    
+    // Verify connection
+    const db = mongoose.connection.db;
+    await db.command({ ping: 1 });
+    console.log('💡 Database ping successful');
   } catch (error) {
-    logError(error);
+    console.error('💥 CRITICAL FAILURE:', error.message);
+    console.log('\n🔥 REQUIRED ACTIONS:');
+    console.log('1. GO TO: https://cloud.mongodb.com → Network Access → Add 0.0.0.0/0');
+    console.log('2. RESTART your computer AND router');
+    console.log('3. TRY with mobile hotspot');
+    console.log('4. CONTACT MongoDB Support if still failing');
     process.exit(1);
   }
 };

@@ -26,11 +26,15 @@ const restaurantSchema = new mongoose.Schema(
       required: [true, "menu is required"],
       //not implemented yet
     },
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
     averageRating: {
       type: Number,
       default: 0,
     },
+    numberOfRatings: {
+      type: Number,
+      default: 0,
+    },
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
   },
   { timestamps: true }
 );

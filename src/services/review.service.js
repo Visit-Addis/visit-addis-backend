@@ -3,34 +3,32 @@ import { CustomError } from "../utils/index.js";
 import addReview from "./util.js";
 
 const postReview = async (userReview) => {
-  const { userId, itemId, category } = userReview;
+  const { itemId, category, newRating } = userReview;
   const review = await Review.create(userReview);
   const reviewId = review.id;
   let successMessagee = null;
   switch (category) {
     case "event":
-      await addReview(Event, itemId, userId, reviewId);
+      await addReview(Event, itemId, reviewId, newRating);
       successMessagee = "Review added successfully";
       break;
     case "attraction":
-      await addReview(Attraction, itemId, userId, reviewId);
+      await addReview(Attraction, itemId, reviewId, newRating);
       successMessagee = "Review added successfully";
       break;
     case "restaurant":
-      await addReview(Restaurant, itemId, userId, reviewId);
+      await addReview(Restaurant, itemId, reviewId, newRating);
       successMessagee = "Review added successfully";
       break;
     default:
       throw new CustomError(400, `No category found${category}`, true);
-      break;
   }
-
   return successMessagee;
 };
 
 const deleteReview = async (id) => {
   const deletedReview = await Review.findByIdAndDelete(id);
-  if (!deleteReview) {
+  if (!deletedReview) {
     throw new CustomError(400, "no Review found with this id");
   }
   return " review deleted successfully";

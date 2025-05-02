@@ -1,4 +1,4 @@
-import { attractionService } from "../services/index.js";
+import { attractionService, reviewService } from "../services/index.js";
 import { handleCatchError } from "../utils/index.js";
 
 const postAttraction = handleCatchError(async (req, res) => {
@@ -35,6 +35,12 @@ const searchAttractions = async (req, res) => {
   res.status(200).json(attractions);
 };
 
+const postReview = handleCatchError(async (req, res) => {
+  (req.body.category = "attraction"), (req.body.userId = req.user.id);
+  const review = await reviewService.postReview(req.body);
+  res.status(201).json(review);
+});
+
 export default {
   getAttractions,
   getAttractionDetail,
@@ -42,4 +48,5 @@ export default {
   postAttraction,
   updateAttraction,
   deleteAttraction,
+  postReview,
 };

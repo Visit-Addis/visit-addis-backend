@@ -40,6 +40,10 @@ const attractionSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    numberOfRatings: {
+      type: Number,
+      default: 0,
+    },
     ticketPrice: {
       type: Number,
       required: [true, "Attraction ticket price is required"],

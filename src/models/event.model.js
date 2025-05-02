@@ -41,6 +41,15 @@ const eventSchema = new mongoose.Schema(
         ref: "Image",
       },
     ],
+    averageRating: {
+      type: Number,
+      default: 0,
+    },
+    numberOfRatings: {
+      type: Number,
+      default: 0,
+    },
+
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
   },
   { timestamps: true }

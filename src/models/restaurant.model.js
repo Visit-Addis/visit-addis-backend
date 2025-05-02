@@ -22,7 +22,7 @@ const restaurantSchema = new mongoose.Schema(
       required: [true, "priceRange is required"],
     },
     menu: {
-      type: String,
+      type: [String], // have  Changed to an array of strings
       required: [true, "menu is required"],
       //not implemented yet
     },

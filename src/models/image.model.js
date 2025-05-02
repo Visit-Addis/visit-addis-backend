@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { format } from "./plugin.js";
 
 const imageSchema = new mongoose.Schema(
   {
@@ -10,5 +11,9 @@ const imageSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+imageSchema.plugin(format, "toJSON");
+imageSchema.plugin(format, "toObject");
+
 const Image = mongoose.model("Image", imageSchema);
 export default Image;

@@ -5,6 +5,7 @@ import emailService from "./email.service.js";
 import attractionService from "./attraction.service.js";
 import reviewService from "./review.service.js";
 import restaurantService from "./restaurant.service.js";
+import imgService from "./img.service.js";
 export {
   authService,
   tokenService,
@@ -13,4 +14,5 @@ export {
   attractionService,
   reviewService,
   restaurantService,
+  imgService,
 };

@@ -5,6 +5,7 @@ import mongooseErrorHandlers from "./mongoose.error.js";
 import authenticationErrorHandlers from "./auth.error.js";
 import genericErrorHandlers from "./genneric.error.js";
 import pick from "./pick.js";
+import uploadImage from "./img.uplouder.js";
 
 export {
   logError,
@@ -14,4 +15,5 @@ export {
   authenticationErrorHandlers,
   genericErrorHandlers,
   pick,
+  uploadImage,
 };

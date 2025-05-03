@@ -41,7 +41,7 @@ const getEventDetail = async (id) => {
   const eventDetail = await Event.findById(id)
     .select("id name description date time images averageRating reviews")
     .populate({ path: "images", select: "url" })
-    .populate({ path: "reviews", select: "userId,rating comment" });
+    .populate({ path: "reviews", select: "userId rating comment" });
 
   if (!eventDetail) {
     throw new CustomError(404, "event detail not found", true);

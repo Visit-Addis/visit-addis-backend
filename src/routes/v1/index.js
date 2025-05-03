@@ -24,7 +24,7 @@ const routes = [
     route: atrractionRoute,
   },
   {
-    path: "/restuarant",
+    path: "/restaurant",
     route: restuarantRoute,
   },
 ];

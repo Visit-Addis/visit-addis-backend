@@ -13,7 +13,7 @@ Router.route("/")
     restaurantController.postRestaurant
   );
 
-Router.route("/:d")
+Router.route("/:id")
   .get(auth.isAuthenticated, restaurantController.getRestaurantDetails)
   .put(
     auth.isAuthenticated,
@@ -29,6 +29,7 @@ Router.route("/:d")
 
 Router.route("/res/search").get(restaurantController.searchRestaurants);
 Router.route("/rev/review").post(
+  auth.isAuthenticated,
   auth.isAuthorizedTo("review"),
   restaurantController.postReview
 );

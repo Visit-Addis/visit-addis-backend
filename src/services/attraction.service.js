@@ -48,7 +48,7 @@ const getAttractionDetails = async (id) => {
       "id name description images ticketPrice location category averageRating"
     )
     .populate({ path: "images", select: "url" })
-    .populate({ path: "reviews", select: "userId,rating comment" });
+    .populate({ path: "reviews", select: "userId rating comment" });
   if (!attractionDetail) {
     throw new CustomError(400, "No attraction details found", true);
   }

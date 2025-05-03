@@ -8,7 +8,7 @@ const getRestaurants = handleCatchError(async (req, res) => {
 });
 
 const getRestaurantDetails = handleCatchError(async (req, res) => {
-  const { id } = req.params;
+  const id = req.params.id;
   const restaurant = await restaurantService.getRestaurantDetails(id);
   res.status(200).json(restaurant);
 });
@@ -40,7 +40,7 @@ const updateRestaurant = handleCatchError(async (req, res) => {
 
 const postReview = handleCatchError(async (req, res) => {
   req.body.category = "restaurant";
-  req.body.userId = req.user.Id;
+  req.body.userId = req.user.id;
   const message = await reviewService.postReview(req.body);
   res.status(200).json(message);
 });

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { format } from "./plugin.js";
+import { category } from "../configs/constants.js";
 const restaurantSchema = new mongoose.Schema(
   {
     name: {
@@ -11,6 +12,11 @@ const restaurantSchema = new mongoose.Schema(
       type: String,
       required: [true, "location is required"],
       trim: true,
+    },
+    category: {
+      type: String,
+      enum: category.restaurants,
+      required: [true, "category is required"],
     },
     contact: {
       type: String,
@@ -25,7 +31,6 @@ const restaurantSchema = new mongoose.Schema(
     ],
     priceRange: {
       type: String,
-      required: [true, "priceRange is required"],
     },
     menu: {
       type: [String], // have  Changed to an array of strings

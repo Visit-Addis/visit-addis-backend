@@ -1,6 +1,6 @@
 import { tokenService, userService } from "../services/index.js";
 import { roles, roleRights } from "../configs/constants.js";
-import { CustomError } from "../utils";
+import { CustomError } from "../utils/index.js";
 
 const isAuthenticated = async (req, res, next) => {
   try {

@@ -18,13 +18,19 @@ const addReview = async (model, itemId, reviewId, newRating) => {
   if (!item) {
     throw new CustomError(400, "No Item found with this Id", true);
   }
+
+  const currentAvg = Number(item.averageRating) || 0;
+  const currentCount = Number(item.numberOfRatings) || 0;
+  const newRate = Number(newRating) || 0;
+
   item.reviews.push(reviewId);
-  item.averageRating = calculateAvgRatings(
-    item.averageRating,
-    item.numberOfRatings,
-    newRating
+  item.averageRating = await calculateAvgRatings(
+    currentAvg,
+    currentCount,
+    newRate
   );
-  item.numberOfRatings += 1;
+  item.numberOfRatings = currentCount + 1;
+
   const review = await item.save();
   return review;
 };

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { format } from "./plugin.js";
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -28,6 +29,7 @@ const reviewSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+reviewSchema.plugin(format, "toJSON");
+reviewSchema.plugin(format, "toObject");
 const Review = mongoose.model("Review", reviewSchema);
 export default Review;

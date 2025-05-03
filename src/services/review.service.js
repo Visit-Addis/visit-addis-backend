@@ -1,23 +1,25 @@
+import mongoose from "mongoose";
 import { Review, Event, Restaurant, Attraction } from "../models/index.js";
 import { CustomError } from "../utils/index.js";
 import addReview from "./util.js";
 
 const postReview = async (userReview) => {
-  const { itemId, category, newRating } = userReview;
+  const { itemId, category, rating } = userReview;
+  userReview.itemId = new mongoose.Types.ObjectId(itemId);
   const review = await Review.create(userReview);
   const reviewId = review.id;
   let successMessagee = null;
   switch (category) {
     case "event":
-      await addReview(Event, itemId, reviewId, newRating);
+      await addReview(Event, itemId, reviewId, rating);
       successMessagee = "Review added successfully";
       break;
     case "attraction":
-      await addReview(Attraction, itemId, reviewId, newRating);
+      await addReview(Attraction, itemId, reviewId, rating);
       successMessagee = "Review added successfully";
       break;
     case "restaurant":
-      await addReview(Restaurant, itemId, reviewId, newRating);
+      await addReview(Restaurant, itemId, reviewId, rating);
       successMessagee = "Review added successfully";
       break;
     default:

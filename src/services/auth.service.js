@@ -21,7 +21,6 @@ const registerUser = async (userData) => {
     throw new CustomError(400, "user name already exists", true);
   }
   if (isEmailUsed) {
-    console.log("Email is used is executing..........", isEmailUsed);
     throw new CustomError(400, "email already exists", true);
   }
   const user = await User.create(userData);

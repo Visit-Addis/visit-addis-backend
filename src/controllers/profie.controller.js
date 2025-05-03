@@ -17,7 +17,7 @@ const updateMyProfile = handleCatchError(async (req, res) => {
 
 const addMyFavorite = handleCatchError(async (req, res) => {
   const userId = req.user.id;
-  const message = await userService.addfavorite(userId, req.body);
+  const message = await userService.addFavorite(userId, req.body);
   res.status(201).json(message);
 });
 

@@ -9,6 +9,7 @@ Router.route("/")
   .put(
     auth.isAuthenticated,
     auth.isAuthorizedTo("manage-profile"),
+    upload.single("image"),
     profileController.updateMyProfile
   );
 

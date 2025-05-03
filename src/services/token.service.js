@@ -12,7 +12,7 @@ const generateToken = (userId, userRole, tokenType, expiresIn) => {
     role: userRole,
     type: tokenType,
     iat: DateTime.now().toUnixInteger(),
-    expiresIn: expiresIn,
+    exp: expiresIn.toUnixInteger(),
   };
   return sign(payload, envVar.token.jwtSecret);
 };

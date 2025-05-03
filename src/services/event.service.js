@@ -14,6 +14,10 @@ const updateEvent = async (id, eventData) => {
   if (!event) {
     throw new CustomError(404, "This event is not found currently", true);
   }
+  Object.keys(eventData).forEach((key) => {
+    event[key] = eventData[key];
+  });
+  await event.save();
   return "event updated successfully";
 };
 
@@ -36,7 +40,7 @@ const getEvents = async () => {
 const getEventDetail = async (id) => {
   const eventDetail = await Event.findById(id)
     .select("id name description date time images averageRating reviews")
-    .populate({ path: images, select: "url" })
+    .populate({ path: "images", select: "url" })
     .populate({ path: "reviews", select: "userId,rating comment" });
 
   if (!eventDetail) {

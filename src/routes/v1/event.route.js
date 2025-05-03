@@ -27,8 +27,8 @@ Router.route("/:id")
     eventController.deleteEvent
   );
 
-Router.route("/att/search").get(eventController.searchEvents);
-Router.route("/rev/reviews").post(
+Router.route("/ev/search").get(eventController.searchEvents);
+Router.route("/rev/review").post(
   auth.isAuthenticated,
   auth.isAuthorizedTo("review"),
   eventController.postReview

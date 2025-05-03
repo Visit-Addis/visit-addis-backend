@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { category } from "../configs/constants.js";
+import { format } from "./plugin.js";
 
 const eventSchema = new mongoose.Schema(
   {
@@ -14,7 +15,7 @@ const eventSchema = new mongoose.Schema(
       trim: true,
     },
     date: {
-      type: Date,
+      type: String,
       required: [true, "date is required"],
     },
     time: {
@@ -54,6 +55,7 @@ const eventSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+eventSchema.plugin(format, "toJSON");
+eventSchema.plugin(format, "toObject");
 const Event = mongoose.model("Event", eventSchema);
 export default Event;

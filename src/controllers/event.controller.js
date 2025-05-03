@@ -34,7 +34,7 @@ const getRestaurantDetails = handleCatchError(async (req, res) => {
 
 const postReview = handleCatchError(async (req, res) => {
   req.body.category = "event";
-  req.body.userId = req.user.Id;
+  req.body.userId = req.user.id;
   const message = await reviewService.postReview(req.body);
   res.status(200).json(message);
 });

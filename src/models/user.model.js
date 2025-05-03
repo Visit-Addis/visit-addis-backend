@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
     },
-    profiileImage: {
+    profileImage: {
       type: String,
     },
     favorite: {

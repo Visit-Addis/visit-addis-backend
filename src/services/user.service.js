@@ -8,6 +8,7 @@ const getUserById = async (userId) => {
   }
   return user;
 };
+
 const getUserByEmail = async (email) => {
   const user = await User.findOne({ email });
   if (!user) {
@@ -15,5 +16,21 @@ const getUserByEmail = async (email) => {
   }
   return user;
 };
+
+const getMyProfile = async (userId) => {
+  const profile = await User.findById(userId)
+    .select("id userName email favorite profileImage")
+    .populate({
+      path: "favorite.attraction",
+      select: "name",
+    })
+    .populate({
+      path: "favorite.",
+      select: "name",
+    });
+  return profile;
+};
+const upadateProfile = async (userId, userData) => {};
+const addfavorite = (userId) => {};
 
 export default { getUserByEmail, getUserById };

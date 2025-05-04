@@ -35,7 +35,7 @@ const updateProfile = async (userId, userData) => {
   if (!profile) {
     throw new CustomError(404, "User profile not found", true);
   }
-  const allowedFields = ["userName", "email", "profileImage"];
+  const allowedFields = ["userName", "email", "images"];
   Object.keys(userData).forEach((key) => {
     if (allowedFields.includes(key)) {
       profile[key] = userData[key];

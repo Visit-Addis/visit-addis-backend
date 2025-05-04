@@ -4,7 +4,7 @@ import { CustomError } from "../utils/index.js";
 const getRestaurants = async () => {
   const restaurants = await Restaurant.find(
     {},
-    "id name images location"
+    "id name images location description"
   ).populate({ path: "images", select: "url" });
   if (!restaurants) {
     throw new CustomError(400, "No Restaurant found", true);
@@ -14,7 +14,9 @@ const getRestaurants = async () => {
 
 const getRestaurantDetails = async (id) => {
   const restaurant = await Restaurant.findById(id)
-    .select("id name location images averageRating contact reviews")
+    .select(
+      "id name location images description averageRating contact reviews menu"
+    )
     .populate({ path: "images", select: "url" })
     .populate({ path: "reviews", select: "userId rating comment" });
   if (!restaurant) {

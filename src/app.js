@@ -9,11 +9,12 @@ import { errorHandler, authLimiter } from "./middlewares/index.js";
 import { CustomError } from "./utils/index.js";
 import apiRoute from "./routes/v1/index.js";
 import { envVar } from "./configs/env.vars.js";
+import { morganFormat, stream } from "./configs/req.logger.js";
 
 const app = express();
 
 app.use(cors());
-
+app.use(morgan(morganFormat, { stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

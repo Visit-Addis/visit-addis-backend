@@ -13,6 +13,10 @@ const restaurantSchema = new mongoose.Schema(
       required: [true, "location is required"],
       trim: true,
     },
+    description: {
+      type: String,
+      required: [true, "description is required"],
+    },
     category: {
       type: String,
       enum: category.restaurants,

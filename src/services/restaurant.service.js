@@ -64,8 +64,12 @@ const updateRestaurant = async (id, data) => {
     throw new CustomError(404, "No  restaurant found with this Id", true);
   }
   if (data.images) {
-    attraction.images.push(data.images);
+    restaurant.images.push(data.images);
     delete data.images;
+  }
+  if (data.menu) {
+    restaurant.menu.push(data.menu);
+    delete data.menu;
   }
 
   Object.keys(data).forEach((key) => {

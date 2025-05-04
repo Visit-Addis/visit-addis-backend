@@ -16,7 +16,7 @@ const updateEvent = async (id, eventData) => {
   }
 
   if (data.images) {
-    attraction.images.push(data.images);
+    event.images.push(data.images);
     delete data.images;
   }
   Object.keys(eventData).forEach((key) => {

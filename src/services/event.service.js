@@ -14,6 +14,11 @@ const updateEvent = async (id, eventData) => {
   if (!event) {
     throw new CustomError(404, "This event is not found currently", true);
   }
+
+  if (data.images) {
+    attraction.images.push(data.images);
+    delete data.images;
+  }
   Object.keys(eventData).forEach((key) => {
     event[key] = eventData[key];
   });

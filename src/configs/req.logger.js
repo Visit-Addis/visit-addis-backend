@@ -1,7 +1,6 @@
 import logger from "./wins.logger.js";
 
 const morganFormat = ":remote-user :remote-addr :method :url :status";
-
 const stream = {
   write: (data) => {
     const match = data.trim().match(/^(\S+) (\S+) (\S+) (\S+) (\d{3})$/);

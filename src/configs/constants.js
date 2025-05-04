@@ -7,7 +7,7 @@ const roleRights = new Map(Object.entries(allRoles));
 
 const category = {
   attractions: ["historicals", "museums", "parks", "landmarks"],
-  events: ["sports", "business", "culture", "festivals"],
+  events: ["sports", "business", "culture", "festivals", "technology"],
   restaurants: ["traditional", "modern", "cafe"],
 };
 

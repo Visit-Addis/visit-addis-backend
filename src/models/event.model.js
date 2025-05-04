@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { category } from "../configs/constants.js";
 import { format } from "./plugin.js";
+import { type } from "os";
 
 const eventSchema = new mongoose.Schema(
   {
@@ -35,6 +36,10 @@ const eventSchema = new mongoose.Schema(
       type: String,
       enum: category.events,
       required: [true, "category is required"],
+    },
+    ticketPrice: {
+      type: Number,
+      required: [true, "Ticket price is required"],
     },
     images: [
       {

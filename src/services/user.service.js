@@ -19,7 +19,8 @@ const getUserByEmail = async (email) => {
 
 const getMyProfile = async (userId) => {
   const profile = await User.findById(userId)
-    .select("userName email favorite profileImage role")
+    .select("userName email favorite images role")
+    .populate({ path: "images", select: "url" })
     .populate("favorite.attractions", "name")
     .populate("favorite.events", "name")
     .populate("favorite.restaurants", "name");

@@ -9,23 +9,22 @@ addColors({
   debug: "blue bold",
 });
 
-// console transport
 const consoleTransport = new transports.Console({
   format: combine(colorize({ all: true }), simple()),
 });
-//create http logger
+
 const httpLogger = createLogger({
   level: "http",
   format: json(),
   transports: [consoleTransport],
 });
-//create error logger
+
 const errorLogger = createLogger({
   level: "error",
   format: combine(json(), timestamp()),
   transports: [consoleTransport],
 });
-//create email sent logger
+
 const emailLogger = createLogger({
   level: "info",
   format: combine(json(), timestamp()),

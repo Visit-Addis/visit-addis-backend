@@ -45,7 +45,7 @@ const getEvents = async () => {
 const getEventDetail = async (id) => {
   const eventDetail = await Event.findById(id)
     .select(
-      "id name description date time images averageRating reviews ticketPrice"
+      "id name description date time organizer images averageRating reviews ticketPrice"
     )
     .populate({ path: "images", select: "url" })
     .populate({ path: "reviews", select: "userId rating comment" });

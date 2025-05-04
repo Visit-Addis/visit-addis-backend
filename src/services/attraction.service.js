@@ -21,6 +21,10 @@ const updateAttraction = async (id, data) => {
   if (!attraction) {
     throw new CustomError(400, "NO attraction found with this id", true);
   }
+  if (data.images) {
+    attraction.images.push(data.images);
+    delete data.images;
+  }
   Object.keys(data).forEach((key) => {
     attraction[key] = data[key];
   });

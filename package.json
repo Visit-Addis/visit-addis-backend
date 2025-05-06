@@ -13,12 +13,13 @@
   "license": "mit",
   "description": "This is the backend API built with Node.js, Express, and MongoDB. It manages and serves data for the Visit-Addis application, providing endpoints to access information about locations, attractions for exploring Addis Ababa",
   "dependencies": {
-    "express": "^5.1.0",
     "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.0",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "express-rate-limit": "^7.5.0",
     "express-session": "^1.18.1",
     "joi": "^17.13.3",
@@ -26,12 +27,14 @@
     "luxon": "^3.6.0",
     "mongoose": "^8.13.2",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.2",
     "nodemailer": "^6.10.0",
     "passport": "^0.7.0",
     "passport-google-oauth2": "^0.2.0",
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.3"
   }
 }

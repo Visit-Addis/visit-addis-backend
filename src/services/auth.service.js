@@ -38,7 +38,7 @@ const loginUser = async (email, password) => {
   if (await user.isGAuthUser()) {
     throw new CustomError(403, "please login with your google acount", true);
   }
-  if (!user.verifyPassword(password)) {
+  if (!(await user.verifyPassword(password))) {
     throw new CustomError(400, "Incorrect Email or Password", true);
   }
   const accessToken = tokenService.generateToken(
